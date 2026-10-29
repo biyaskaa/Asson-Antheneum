@@ -39,27 +39,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--lamp); outline-offset: 3px; border-radius: 6px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* бумажное зерно поверх всего сайта, дрожит покадрово */
-.grain {
-  position: fixed; inset: -50%;
-  z-index: 90; pointer-events: none;
-  opacity: .09; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 1s steps(6) infinite;
-}
-@keyframes grain {
-  0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); }
-  60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); }
-}
-
 /* ───── Шапка: тёмная «таблетка» с бургером ───── */
 .topbar {
   position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
   z-index: 80;
   display: flex; align-items: center; gap: clamp(16px, 4vw, 48px);
   padding: 8px 8px 8px 22px;
-  background: rgba(12, 15, 26, .82);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  background: rgba(12, 15, 26, .92);
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
 }
@@ -137,8 +123,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* ───── HERO со сценой ───── */
 .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; }
-.scene { position: absolute; inset: 0; width: 100%; height: 100%; }
-.scene .layer { will-change: transform; }
+.scene { position: absolute; inset: 0; overflow: hidden; contain: strict; background: #1c2543; }
+/* каждый слой — отдельная картинка, которую двигает видеокарта; фильтры внутри считаются один раз */
+.lyr { position: absolute; left: -7%; top: -7%; width: 114%; height: 114%; max-width: none; will-change: transform; transform: translate3d(0,0,0); }
+img.lyr, .lyr--island img { display: block; }
+.lyr--static { will-change: auto; }
+.lyr--island { transform-origin: 46% 60%; }
+.lyr--island .frame { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; }
 .hero__title {
   position: absolute; left: calc(var(--gutter) - .06em); bottom: -0.2em; margin: 0;
   font-weight: 500; letter-spacing: -.065em; line-height: .8;
@@ -173,108 +164,37 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: end; }
 @media (max-width: 860px) { .intro { grid-template-columns: 1fr; } }
 
-/* ───── История перевода (закреплённая сцена) ───── */
-.story { position: relative; height: 340vh; }
-.story__stage {
-  position: sticky; top: 0; height: 100svh; overflow: hidden;
-  background: radial-gradient(120% 90% at 50% 110%, #2c3658 0%, var(--night) 60%);
+/* ───── Полка: ярусы, книги переносятся на следующую полку ───── */
+.bookshelf__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px 40px; }
+.shelves {
+  --row: 300px; --spine: 66px; --plank: 16px;
+  margin-top: 56px;
+  display: grid; grid-template-columns: repeat(auto-fill, var(--spine)); grid-auto-rows: var(--row);
+  justify-content: start; column-gap: 8px; align-items: end;
+  padding: 0 14px;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--row) - var(--plank)), #7a5634 calc(var(--row) - var(--plank)), #5d4027 calc(var(--row) - 4px), rgba(0,0,0,.5) calc(var(--row) - 4px), transparent var(--row));
+  padding-bottom: 0;
 }
-.story__caption {
-  position: absolute; left: var(--gutter); top: clamp(90px, 16vh, 150px); z-index: 3;
-  max-width: 30ch;
-}
-.story__caption p {
-  position: absolute; top: 0; left: 0; margin: 0; width: min(30ch, 80vw);
-  font-size: clamp(24px, 2.6vw, 40px); line-height: 1.12; letter-spacing: -.02em; font-weight: 500;
-  opacity: 0; transform: translateY(16px); transition: opacity .5s, transform .6s var(--ease-out);
-}
-.story__caption p.on { opacity: 1; transform: none; }
-.story__caption p span { display: block; margin-top: 10px; font-family: var(--font-lit); font-style: italic; font-weight: 500; font-size: .62em; letter-spacing: 0; color: var(--lamp-soft); }
-.story__steps { position: absolute; left: var(--gutter); bottom: 32px; display: flex; gap: 8px; z-index: 3; }
-.story__steps b { width: 38px; height: 4px; border-radius: 2px; background: rgba(236, 230, 211, .2); overflow: hidden; position: relative; }
-.story__steps b i { position: absolute; inset: 0; background: var(--lamp); transform-origin: 0 50%; transform: scaleX(0); }
-
-.paperbook {
-  position: absolute; left: 50%; top: 54%;
-  width: min(640px, 82vw); aspect-ratio: 1.45; perspective: 1600px;
-  transform: translate(-50%, -50%);
-}
-.paperbook__page {
-  position: absolute; top: 0; bottom: 0; width: 50%;
-  background: var(--paper);
-  box-shadow: inset 0 0 40px rgba(120, 100, 60, .22);
-  filter: url(#roughen);
-}
-.paperbook__page--l { left: 0; border-radius: 6px 0 0 6px; transform-origin: 100% 50%; }
-.paperbook__page--r { right: 0; border-radius: 0 6px 6px 0; transform-origin: 0 50%; }
-.paperbook__cover {
-  position: absolute; top: -2%; bottom: -2%; right: -1%; width: 51%;
-  background: #8a4b26; border-radius: 0 8px 8px 0; transform-origin: 0 50%;
-  transform-style: preserve-3d; backface-visibility: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
-  filter: url(#roughen);
-}
-.paperbook__cover::after { content: ""; position: absolute; inset: 12% 14%; border: 2px solid rgba(236, 230, 211, .5); border-radius: 4px; }
-.paperbook__lines { position: absolute; inset: 14% 12%; display: flex; flex-direction: column; gap: 9%; }
-.paperbook__lines i { height: 5px; border-radius: 3px; background: rgba(27, 32, 51, .16); }
-.paperbook__lines i:nth-child(3n) { width: 70%; }
-.paperbook__shadow { position: absolute; left: 6%; right: 6%; bottom: -16%; height: 14%; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); }
-
-.word {
-  position: absolute; left: 50%; top: 54%; z-index: 4;
-  display: flex; gap: .04em; transform: translate(-50%, -50%);
-  font-size: clamp(24px, 4.4vw, 62px); font-weight: 600; letter-spacing: -.02em; color: var(--ink);
-  perspective: 800px; pointer-events: none;
-}
-.word .lt {
-  display: inline-grid; place-items: center;
-  min-width: .52em; height: 1.18em; padding: 0 .07em;
-  background: var(--paper); border-radius: 4px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, .35);
-  transform-style: preserve-3d;
-  filter: url(#roughen);
-}
-.word .lt.sp { background: transparent; box-shadow: none; filter: none; min-width: .3em; }
-.word .lt b { font-weight: 600; }
-
-.shelf {
-  position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%);
-  width: min(820px, 92vw); height: 34%;
-  display: flex; align-items: flex-end; justify-content: center; gap: 8px;
-}
-.shelf::after { content: ""; position: absolute; left: -3%; right: -3%; bottom: -14px; height: 14px; background: #6b4a2c; border-radius: 3px; box-shadow: 0 14px 30px rgba(0, 0, 0, .45); filter: url(#roughen); }
-.spine {
-  position: relative; width: clamp(34px, 7vw, 64px); border-radius: 4px 4px 2px 2px;
-  display: grid; place-items: center; color: var(--paper);
-  box-shadow: inset -6px 0 10px rgba(0, 0, 0, .25);
-  filter: url(#roughen);
-}
-.spine span {
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  font-family: var(--font-lit); font-style: italic; font-weight: 600; font-size: clamp(13px, 1.6vw, 19px);
-  white-space: nowrap; overflow: hidden; max-height: 90%; text-overflow: ellipsis;
-}
-
-/* ───── Полка с книгами (ссылки в читалку) ───── */
-.bookshelf__row {
-  margin-top: 56px; display: flex; align-items: flex-end; gap: 10px;
-  padding: 0 4px; min-height: 340px; position: relative; overflow-x: auto;
-  scrollbar-width: none;
-}
-.bookshelf__row::-webkit-scrollbar { display: none; }
-.bookshelf__plank { height: 16px; background: #6b4a2c; border-radius: 3px; box-shadow: 0 18px 30px rgba(0, 0, 0, .5); filter: url(#roughen); }
 .bk {
-  flex: 0 0 auto; width: 74px; text-decoration: none; color: var(--paper);
-  display: grid; place-items: center; border-radius: 5px 5px 2px 2px; position: relative;
+  width: var(--spine); margin-bottom: var(--plank); text-decoration: none; color: var(--paper);
+  display: grid; place-items: center; position: relative;
+  border-radius: 5px 6px 2px 2px / 6px 4px 2px 2px;
   box-shadow: inset -8px 0 12px rgba(0, 0, 0, .28), inset 3px 0 0 rgba(255, 255, 255, .08);
-  transition: transform .45s var(--ease-out);
+  transition: transform .35s var(--ease-out);
   transform-origin: 50% 100%;
 }
-.bk span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-lit); font-style: italic; font-weight: 600; font-size: 21px; line-height: 1; white-space: nowrap; }
+.bk span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-lit); font-style: italic; font-weight: 600; font-size: 20px; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: calc(100% - 44px); }
 .bk em { position: absolute; top: 12px; left: 0; right: 0; text-align: center; font-style: normal; font-size: 11px; color: rgba(236, 230, 211, .65); }
-.bk:hover, .bk:focus-visible { transform: translateY(-22px) rotate(-2deg); }
-.bk__tip { position: absolute; bottom: calc(100% + 30px); left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--paper); color: var(--ink); padding: 6px 12px; border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.bk:hover, .bk:focus-visible { transform: translateY(-14px) rotate(-2deg); }
+.bk__tip { position: absolute; bottom: calc(100% + 22px); left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--paper); color: var(--ink); padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 2; }
 .bk:hover .bk__tip, .bk:focus-visible .bk__tip { opacity: 1; }
+@media (max-width: 600px) {
+  .shelves { --row: 250px; --spine: 50px; --plank: 12px; column-gap: 6px; padding: 0 8px; margin-top: 36px; }
+  .bk span { font-size: 15px; max-height: calc(100% - 30px); }
+  .bk em { font-size: 10px; top: 9px; }
+  .bk__tip { display: none; }
+}
 
 /* ───── Создатель ───── */
 .creator { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 32px; border-top: 1px solid rgba(236, 230, 211, .12); }
@@ -299,7 +219,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--c); background: var(--c);
   box-shadow: 0 24px 40px rgba(0, 0, 0, .4), inset 10px 0 14px rgba(0, 0, 0, .25);
   transform: rotate(var(--tilt)); transition: transform .5s var(--ease-out);
-  filter: url(#roughen);
   padding: 22px 22px 20px 30px; display: flex; flex-direction: column;
 }
 .cover__art::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: rgba(0, 0, 0, .25); }
@@ -307,7 +226,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .cover__motif { width: 64%; margin: auto auto 10px; opacity: .95; }
 .cover__krc { font-family: var(--font-lit); font-style: italic; font-weight: 600; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.02; color: var(--paper); margin: 0; }
 .cover__author { color: rgba(236, 230, 211, .7); font-size: 14px; margin-top: 8px; }
-.cover__tape { position: absolute; top: -12px; left: 50%; width: 90px; height: 26px; transform: translateX(-50%) rotate(calc(var(--tilt) * -2)); background: rgba(236, 230, 211, .55); z-index: 2; mix-blend-mode: screen; filter: url(#roughen); }
+.cover__tape { position: absolute; top: -12px; left: 50%; width: 90px; height: 26px; transform: translateX(-50%) rotate(calc(var(--tilt) * -2)); background: rgba(236, 230, 211, .45); z-index: 2; }
 .cover__meta { margin: 18px 0 14px; }
 .cover__meta h3 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.01em; }
 .cover__meta p { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
@@ -375,3 +294,43 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .roundbtn--ghost[aria-pressed="true"] { background: var(--lamp); color: var(--ink); box-shadow: none; }
 .desk.zoomed { place-items: start center; overflow: auto; touch-action: pan-x pan-y; max-height: calc(100svh - 200px); }
 .desk.zoomed .navzone { display: none; }
+
+/* ───── Телефоны ───── */
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .topbar { top: 10px; }
+  .hero__aside p { font-size: 16px; margin-bottom: 18px; }
+  .pill { font-size: 16px; min-height: 48px; padding-left: 18px; gap: 10px; }
+  .pill i { width: 38px; height: 38px; }
+  .section { padding: 72px 16px; }
+  .lede { font-size: clamp(30px, 8.6vw, 40px); }
+  .copy { font-size: 16px; }
+  .creator h2 { font-size: clamp(40px, 12vw, 56px); }
+
+  .page-head { padding: 110px 16px 24px; }
+  .page-head h1 { font-size: clamp(60px, 19vw, 90px); }
+  .page-head p { font-size: 16px; }
+  .page-head__moon { width: 84px; right: -14px; top: 74px; }
+  .covers { grid-template-columns: 1fr 1fr; gap: 30px 14px; padding: 24px 16px 80px; }
+  .cover__art { padding: 14px 12px 12px 20px; }
+  .cover__motif { width: 70%; }
+  .cover__krc { font-size: 19px; }
+  .cover__author { font-size: 12px; margin-top: 4px; }
+  .cover__tape { width: 60px; height: 20px; top: -9px; }
+  .cover__meta { margin: 12px 0 10px; }
+  .cover__meta h3 { font-size: 15px; line-height: 1.25; }
+  .cover__meta p { font-size: 13px; }
+  .cover__actions { flex-direction: column; gap: 8px; }
+  .cover__actions .btn { justify-content: center; min-height: 42px; font-size: 14px; padding: 0 10px; }
+
+  .reader { padding-top: 74px; }
+  .reader__bar { flex-direction: column; align-items: stretch; gap: 10px; padding: 8px 16px; }
+  .reader__title { font-size: 24px; }
+  .picker select { width: 100%; max-width: none; }
+  .desk { padding: 6px 10px; }
+  .reader__controls { position: sticky; bottom: 0; z-index: 7; gap: 8px; padding: 10px 12px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(to bottom, transparent, var(--night) 35%); }
+}
+@media (max-width: 860px) and (max-height: 700px) {
+  .hero__title { top: 80px; font-size: 25vw; }
+  .hero__aside p { font-size: 15px; }
+}

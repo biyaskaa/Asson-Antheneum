@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-
   <header class="topbar">
     <a class="topbar__brand" href="index.html">Asson<sup>*</sup></a>
     <nav class="topbar__links" aria-label="Разделы">
@@ -38,8 +36,8 @@
   <main>
     <!-- ───────── HERO: бумажный остров ───────── -->
     <section class="hero" aria-label="Asson-Antheneum">
-      <svg class="scene" id="scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
+      <div class="scene" id="scene" aria-hidden="true">
+        <svg width="0" height="0" style="position:absolute"><defs>
           <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#0d1222"/>
             <stop offset=".42" stop-color="#1c2543"/>
@@ -66,33 +64,33 @@
             <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
             <feDropShadow in="d" dx="0" dy="6" stdDeviation="5" flood-color="#0a0c16" flood-opacity=".45"/>
           </filter>
-          <filter id="boil" x="-10%" y="-10%" width="120%" height="120%">
-            <feTurbulence id="boilNoise" type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="1" result="n"/>
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
-            <feDropShadow in="d" dx="0" dy="10" stdDeviation="8" flood-color="#06080f" flood-opacity=".55"/>
-          </filter>
+          
           <filter id="dof" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="n"/>
             <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" result="d"/>
             <feGaussianBlur in="d" stdDeviation="5"/>
           </filter>
-        </defs>
-
-        <g class="layer" data-depth="0"><rect x="-200" y="-200" width="2000" height="1400" fill="url(#sky)"/><rect x="-200" y="-200" width="2000" height="1400" fill="url(#sun)"/></g>
-        <g class="layer" data-depth="0.04" id="stars"></g>
-        <g class="layer" data-depth="0.12" id="cloudsFar" filter="url(#paper)"></g>
-
-        <!-- Эльбрус: две вершины -->
-        <g class="layer" data-depth="0.22" filter="url(#paper)">
-          <path d="M-100 820 L180 700 L330 610 L420 560 L470 590 L540 540 L640 600 L760 680 L900 760 L1050 720 L1180 650 L1260 610 L1330 640 L1420 600 L1500 650 L1700 760 L1700 1000 L-100 1000Z" fill="#2c3352"/>
+        <filter id="boil0" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="1" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feDropShadow in="d" dx="0" dy="10" stdDeviation="8" flood-color="#06080f" flood-opacity=".55"/>
+          </filter><filter id="boil1" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="4" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feDropShadow in="d" dx="0" dy="10" stdDeviation="8" flood-color="#06080f" flood-opacity=".55"/>
+          </filter><filter id="boil2" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="9" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feDropShadow in="d" dx="0" dy="10" stdDeviation="8" flood-color="#06080f" flood-opacity=".55"/>
+          </filter></defs></svg>
+        <svg class="lyr" data-depth="0" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="-200" y="-200" width="2000" height="1400" fill="url(#sky)"/><rect x="-200" y="-200" width="2000" height="1400" fill="url(#sun)"/><g id="stars"></g></svg>
+        <svg class="lyr" data-depth="0.18" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g id="cloudsFar" filter="url(#paper)"></g><g filter="url(#paper)"><path d="M-100 820 L180 700 L330 610 L420 560 L470 590 L540 540 L640 600 L760 680 L900 760 L1050 720 L1180 650 L1260 610 L1330 640 L1420 600 L1500 650 L1700 760 L1700 1000 L-100 1000Z" fill="#2c3352"/>
           <path d="M330 610 L420 560 L470 590 L540 540 L600 575 L560 585 L520 570 L480 610 L440 590 L400 612 L370 620Z" fill="#d6d0c0"/>
           <path d="M1180 650 L1260 610 L1330 640 L1420 600 L1470 630 L1430 628 L1400 645 L1340 660 L1290 640 L1240 662Z" fill="#cfc8b6" opacity=".85"/>
-        </g>
-        <g class="layer" data-depth="0.3" id="cloudsMid" filter="url(#paper)"></g>
-
-        <!-- Остров -->
-        <g class="layer" data-depth="0.55" id="island">
-          <g id="islandBob" filter="url(#boil)">
+        </g></svg>
+        <svg class="lyr" data-depth="0.3" data-drift="0.12" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g id="cloudsMid" filter="url(#paper)"></g></svg>
+        <div class="lyr lyr--island" data-depth="0.55" id="island">
+          <svg class="frame on" id="islandArt" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g filter="url(#boil0)">
             <!-- нижняя скала слоями бумаги -->
             <path d="M470 560 L1010 560 L980 640 L930 700 L880 790 L820 860 L770 930 L735 870 L690 820 L640 760 L580 700 L520 640Z" fill="url(#rock)"/>
             <path d="M500 590 L990 585 L960 640 L900 690 L840 690 L790 720 L730 700 L660 690 L600 660 L540 640Z" fill="#7b5e45"/>
@@ -128,7 +126,7 @@
             <!-- свет от книги на земле -->
             <ellipse cx="790" cy="540" rx="120" ry="40" fill="url(#bookglow)" opacity=".6"/>
             <!-- читатель -->
-            <g id="reader">
+            <g>
               <path d="M760 545 Q756 505 772 490 Q790 482 806 492 Q816 512 812 545Z" fill="#3c3a42"/>
               <path d="M748 548 Q780 532 832 546 Q820 560 790 562 Q760 562 748 548Z" fill="#2c2b31"/>
               <circle cx="788" cy="474" r="15" fill="#c99a77"/>
@@ -137,14 +135,12 @@
               <path d="M812 506 L816 524" stroke="#d9b98a" stroke-width="1.5"/>
               <circle cx="816" cy="512" r="70" fill="url(#bookglow)" opacity=".85"/>
             </g>
-          </g>
-          <!-- буквы-мотыльки вокруг книги -->
-          <g id="letters" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-weight="600" font-size="26" text-anchor="middle"></g>
-        </g>
-
-        <g class="layer" data-depth="1" id="cloudsNear" filter="url(#dof)"></g>
-        <rect x="-200" y="560" width="2000" height="640" fill="url(#vignette)"/>
-      </svg>
+          </g></svg>
+          <svg class="frame frame--letters" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g id="letters" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-weight="600" font-size="26" text-anchor="middle"></g></svg>
+        </div>
+        <svg class="lyr" data-depth="1" data-drift="0.25" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g id="cloudsNear" filter="url(#dof)"></g></svg>
+        <svg class="lyr lyr--static" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="-200" y="560" width="2000" height="640" fill="url(#vignette)"/></svg>
+      </div>
 
       <h1 class="hero__title" id="heroTitle" aria-label="Asson">
         <span class="ch">A</span><span class="ch">s</span><span class="ch">s</span><span class="ch">o</span><span class="ch">n</span><sup>*</sup>
@@ -168,39 +164,18 @@
       </div>
     </section>
 
-    <!-- ───────── Как книга переходит на родной язык ───────── -->
-    <section class="story" id="story" aria-label="Как книга переходит на родной язык">
-      <div class="story__stage">
-        <div class="story__caption" aria-live="polite">
-          <p data-step="0">Берём книгу, которую знают по-русски<span>Ф. Достоевский, «Белые ночи»</span></p>
-          <p data-step="1">Переводим её — слово за словом<span>орус тилден — малкъар тилге</span></p>
-          <p data-step="2">И ставим на общую полку<span>девять книг, открытых для всех</span></p>
-        </div>
-
-        <div class="paperbook" id="paperbook" aria-hidden="true">
-          <div class="paperbook__shadow"></div>
-          <div class="paperbook__page paperbook__page--l"><div class="paperbook__lines"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-          <div class="paperbook__page paperbook__page--r"><div class="paperbook__lines"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-          <div class="paperbook__cover"></div>
-        </div>
-
-        <div class="word" id="word" aria-hidden="true"></div>
-        <div class="shelf" id="shelf" aria-hidden="true"></div>
-
-        <div class="story__steps" aria-hidden="true"><b><i></i></b><b><i></i></b><b><i></i></b></div>
-      </div>
-    </section>
-
     <!-- ───────── Полка ───────── -->
     <section class="section bookshelf" id="shelfSection">
-      <h2 class="lede">Выберите книгу — она откроется в читалке</h2>
-      <div class="bookshelf__row" id="bookRow"></div>
-      <div class="bookshelf__plank" aria-hidden="true"></div>
+      <div class="bookshelf__head">
+        <h2 class="lede">Выберите книгу — она откроется в читалке</h2>
+        <a class="pill pill--ghost" href="library.html">Все книги в PDF <i data-icon="down"></i></a>
+      </div>
+      <div class="shelves" id="bookRow"></div>
     </section>
 
     <!-- ───────── Создатель ───────── -->
     <section class="section creator">
-      <h2><small>Создатель проекта</small>Бияслан Мокаев</h2>
+      <h2><small>Создатель проекта</small>Мокаев Бийаслан</h2>
       <a class="pill" href="https://t.me/mkvvprojects" target="_blank" rel="noopener">Telegram <i data-icon="arrow"></i></a>
     </section>
   </main>
