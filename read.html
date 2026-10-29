@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Читать онлайн — Asson-Antheneum</title>
+  <meta name="description" content="Читайте переводы классики на карачаево-балкарский язык онлайн, страница за страницей.">
+  <meta name="theme-color" content="#141a2b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23141a2b'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23f0a35e' font-family='Georgia'%3E*%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">Asson<sup>*</sup></a>
+    <nav class="topbar__links" aria-label="Разделы">
+      <a href="index.html">Главная</a>
+      <a href="library.html">Скачать</a>
+      <a href="read.html" aria-current="page">Читать</a>
+    </nav>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню"><span></span></button>
+  </header>
+
+  <div class="menu" id="menu">
+    <nav aria-label="Меню">
+      <a href="index.html">Главная <small>о проекте</small></a>
+      <a href="library.html">Скачать <small>PDF всех книг</small></a>
+      <a href="read.html">Читать <small>онлайн-книжка</small></a>
+      <a href="https://t.me/mkvvprojects" target="_blank" rel="noopener">Telegram <small>канал создателя</small></a>
+    </nav>
+    <p class="menu__foot">Asson-Antheneum — библиотека переводов на карачаево-балкарский язык</p>
+  </div>
+
+  <main class="reader" id="reader">
+    <div class="reader__bar">
+      <h1 class="reader__title" id="bookTitle">Читалка<small>выберите книгу</small></h1>
+      <div class="picker">
+        <label class="sr-only" for="bookSelect">Произведение</label>
+        <select id="bookSelect"></select>
+      </div>
+    </div>
+    <div class="desk" id="desk">
+      <div class="spread" id="spread"></div>
+      <button class="navzone navzone--prev" id="zonePrev" type="button" aria-label="Предыдущая страница" tabindex="-1"></button>
+      <button class="navzone navzone--next" id="zoneNext" type="button" aria-label="Следующая страница" tabindex="-1"></button>
+      <div class="desk__status" id="status" role="status">Открываю книгу…</div>
+    </div>
+    <div class="reader__controls">
+      <button class="roundbtn" id="prevBtn" type="button" aria-label="Предыдущая страница" data-icon="prev"></button>
+      <div class="progress">
+        <label class="sr-only" for="pageRange">Страница</label>
+        <input type="range" id="pageRange" min="1" max="1" value="1">
+        <output id="pageOut" for="pageRange">1 / 1</output>
+      </div>
+      <button class="roundbtn" id="nextBtn" type="button" aria-label="Следующая страница" data-icon="next"></button>
+      <button class="roundbtn roundbtn--ghost" id="zoomBtn" type="button" aria-label="Увеличить страницу" aria-pressed="false" data-icon="zoom"></button>
+    </div>
+  </main>
+
+  <script src="data/books.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/vendor/pdfjs/pdf.js"></script>
+  <script src="assets/js/reader.js"></script>
+</body>
+</html>

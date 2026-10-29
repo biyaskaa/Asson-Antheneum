@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asson-Antheneum — библиотека переводов на карачаево-балкарский</title>
+  <meta name="description" content="Онлайн-библиотека русской и мировой классики в переводе на карачаево-балкарский язык. Читайте онлайн или скачивайте PDF.">
+  <meta name="theme-color" content="#141a2b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23141a2b'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23f0a35e' font-family='Georgia'%3E*%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">Asson<sup>*</sup></a>
+    <nav class="topbar__links" aria-label="Разделы">
+      <a href="index.html" aria-current="page">Главная</a>
+      <a href="library.html">Скачать</a>
+      <a href="read.html">Читать</a>
+    </nav>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Открыть меню"><span></span></button>
+  </header>
+
+  <div class="menu" id="menu">
+    <nav aria-label="Меню">
+      <a href="index.html">Главная <small>о проекте</small></a>
+      <a href="library.html">Скачать <small>PDF всех книг</small></a>
+      <a href="read.html">Читать <small>онлайн-книжка</small></a>
+      <a href="https://t.me/mkvvprojects" target="_blank" rel="noopener">Telegram <small>канал создателя</small></a>
+    </nav>
+    <p class="menu__foot">Asson-Antheneum — библиотека переводов на карачаево-балкарский язык</p>
+  </div>
+
+  <main>
+    <!-- ───────── HERO: бумажный остров ───────── -->
+    <section class="hero" aria-label="Asson-Antheneum">
+      <svg class="scene" id="scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0d1222"/>
+            <stop offset=".42" stop-color="#1c2543"/>
+            <stop offset=".72" stop-color="#46394f"/>
+            <stop offset="1" stop-color="#a8653f"/>
+          </linearGradient>
+          <radialGradient id="sun" cx="0.8" cy="0.78" r="0.5">
+            <stop offset="0" stop-color="#ffb46a" stop-opacity=".95"/>
+            <stop offset=".45" stop-color="#e2834a" stop-opacity=".4"/>
+            <stop offset="1" stop-color="#e2834a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="bookglow" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#fff1cf" stop-opacity=".95"/>
+            <stop offset=".25" stop-color="#ffc77d" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#f0a35e" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#6a5240"/>
+            <stop offset="1" stop-color="#2c2420"/>
+          </linearGradient>
+          <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1222" stop-opacity="0"/><stop offset="1" stop-color="#0d1222" stop-opacity=".65"/></linearGradient>
+          <filter id="paper" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="2" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feDropShadow in="d" dx="0" dy="6" stdDeviation="5" flood-color="#0a0c16" flood-opacity=".45"/>
+          </filter>
+          <filter id="boil" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence id="boilNoise" type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="1" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feDropShadow in="d" dx="0" dy="10" stdDeviation="8" flood-color="#06080f" flood-opacity=".55"/>
+          </filter>
+          <filter id="dof" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" result="d"/>
+            <feGaussianBlur in="d" stdDeviation="5"/>
+          </filter>
+        </defs>
+
+        <g class="layer" data-depth="0"><rect x="-200" y="-200" width="2000" height="1400" fill="url(#sky)"/><rect x="-200" y="-200" width="2000" height="1400" fill="url(#sun)"/></g>
+        <g class="layer" data-depth="0.04" id="stars"></g>
+        <g class="layer" data-depth="0.12" id="cloudsFar" filter="url(#paper)"></g>
+
+        <!-- Эльбрус: две вершины -->
+        <g class="layer" data-depth="0.22" filter="url(#paper)">
+          <path d="M-100 820 L180 700 L330 610 L420 560 L470 590 L540 540 L640 600 L760 680 L900 760 L1050 720 L1180 650 L1260 610 L1330 640 L1420 600 L1500 650 L1700 760 L1700 1000 L-100 1000Z" fill="#2c3352"/>
+          <path d="M330 610 L420 560 L470 590 L540 540 L600 575 L560 585 L520 570 L480 610 L440 590 L400 612 L370 620Z" fill="#d6d0c0"/>
+          <path d="M1180 650 L1260 610 L1330 640 L1420 600 L1470 630 L1430 628 L1400 645 L1340 660 L1290 640 L1240 662Z" fill="#cfc8b6" opacity=".85"/>
+        </g>
+        <g class="layer" data-depth="0.3" id="cloudsMid" filter="url(#paper)"></g>
+
+        <!-- Остров -->
+        <g class="layer" data-depth="0.55" id="island">
+          <g id="islandBob" filter="url(#boil)">
+            <!-- нижняя скала слоями бумаги -->
+            <path d="M470 560 L1010 560 L980 640 L930 700 L880 790 L820 860 L770 930 L735 870 L690 820 L640 760 L580 700 L520 640Z" fill="url(#rock)"/>
+            <path d="M500 590 L990 585 L960 640 L900 690 L840 690 L790 720 L730 700 L660 690 L600 660 L540 640Z" fill="#7b5e45"/>
+            <path d="M560 660 L640 700 L700 740 L760 760 L820 740 L870 720 L840 790 L790 850 L770 900 L740 840 L690 790 L620 720Z" fill="#4d3b2e"/>
+            <path d="M600 640 q4 50 -10 90 M700 700 q-6 60 6 110 M880 680 q10 40 -4 80" stroke="#2a201b" stroke-width="3" fill="none"/>
+            <!-- трава -->
+            <path d="M450 560 Q470 500 560 470 Q680 430 800 440 Q930 445 1000 500 Q1040 530 1020 565 Q900 600 740 598 Q560 600 450 560Z" fill="#4c6534"/>
+            <path d="M830 445 Q940 450 1000 500 Q1040 530 1020 565 Q960 585 900 590 Q960 540 830 445Z" fill="#6b8645"/>
+            <!-- тропинка -->
+            <path d="M600 580 Q640 540 700 532 Q780 520 820 500 Q860 482 900 488 Q880 500 840 518 Q780 548 720 552 Q660 560 640 590Z" fill="#a9744a"/>
+            <!-- кусты -->
+            <g fill="#3c5229"><circle cx="520" cy="532" r="20"/><circle cx="545" cy="520" r="16"/><circle cx="960" cy="520" r="18"/><circle cx="985" cy="530" r="14"/></g>
+            <g fill="#6f8c45"><circle cx="964" cy="514" r="9"/><circle cx="540" cy="515" r="7"/></g>
+            <!-- балкарская башня -->
+            <g>
+              <path d="M600 520 L606 380 L654 380 L660 520Z" fill="#8a8273"/>
+              <path d="M630 380 L654 380 L660 520 L630 520Z" fill="#b0a690"/>
+              <path d="M598 384 L630 336 L662 384Z" fill="#6c6559"/>
+              <path d="M630 336 L662 384 L630 384Z" fill="#938a78"/>
+              <rect x="622" y="410" width="8" height="18" fill="#1d1a1a"/>
+              <rect x="638" y="452" width="7" height="14" fill="#f0a35e"/>
+              <path d="M606 470 L660 470" stroke="#6c6559" stroke-width="2"/>
+            </g>
+            <!-- телеграфные столбы -->
+            <g stroke="#3a2a20" stroke-width="7" stroke-linecap="round">
+              <path d="M720 528 L716 360"/><path d="M698 384 L738 380"/><path d="M702 400 L734 397"/>
+              <path d="M880 492 L884 360"/><path d="M864 380 L902 382"/>
+            </g>
+            <g stroke="#1a1716" stroke-width="1.6" fill="none" opacity=".8">
+              <path d="M698 384 Q560 420 -100 300"/><path d="M738 380 Q600 430 -100 360"/><path d="M702 400 Q560 450 -100 420"/>
+              <path d="M738 380 Q810 410 864 380"/><path d="M698 384 Q800 420 902 382"/>
+            </g>
+            <!-- свет от книги на земле -->
+            <ellipse cx="790" cy="540" rx="120" ry="40" fill="url(#bookglow)" opacity=".6"/>
+            <!-- читатель -->
+            <g id="reader">
+              <path d="M760 545 Q756 505 772 490 Q790 482 806 492 Q816 512 812 545Z" fill="#3c3a42"/>
+              <path d="M748 548 Q780 532 832 546 Q820 560 790 562 Q760 562 748 548Z" fill="#2c2b31"/>
+              <circle cx="788" cy="474" r="15" fill="#c99a77"/>
+              <path d="M773 472 Q776 456 792 456 Q805 458 803 470 Q794 462 782 468Z" fill="#241d1a"/>
+              <path d="M792 512 L826 500 L836 520 L800 530Z" fill="#fff1cf"/>
+              <path d="M812 506 L816 524" stroke="#d9b98a" stroke-width="1.5"/>
+              <circle cx="816" cy="512" r="70" fill="url(#bookglow)" opacity=".85"/>
+            </g>
+          </g>
+          <!-- буквы-мотыльки вокруг книги -->
+          <g id="letters" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-weight="600" font-size="26" text-anchor="middle"></g>
+        </g>
+
+        <g class="layer" data-depth="1" id="cloudsNear" filter="url(#dof)"></g>
+        <rect x="-200" y="560" width="2000" height="640" fill="url(#vignette)"/>
+      </svg>
+
+      <h1 class="hero__title" id="heroTitle" aria-label="Asson">
+        <span class="ch">A</span><span class="ch">s</span><span class="ch">s</span><span class="ch">o</span><span class="ch">n</span><sup>*</sup>
+      </h1>
+
+      <div class="hero__aside" id="heroAside">
+        <p>Asson-Antheneum — онлайн-библиотека русской и мировой классики в переводе на карачаево-балкарский язык. Читайте книги на родном языке прямо в браузере или скачивайте их в PDF.</p>
+        <div class="row">
+          <a class="pill" href="read.html">Читать <i data-icon="arrow"></i></a>
+          <a class="pill pill--ghost" href="library.html">Скачать <i data-icon="down"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── О проекте ───────── -->
+    <section class="section intro" id="about">
+      <h2 class="lede">Классика, которую теперь можно прочитать на родном языке</h2>
+      <div class="copy">
+        <p>Карачаево-балкарский — родной язык карачаевцев и балкарцев. Художественной литературы на нём немного, а переводов мировой классики — ещё меньше.</p>
+        <p>Asson-Antheneum собирает такие переводы в одном месте: Пушкин и Гоголь, Толстой и Чехов, Бунин и Достоевский, Эдгар По и О. Генри. Все книги бесплатны — их можно читать онлайн или скачать.</p>
+      </div>
+    </section>
+
+    <!-- ───────── Как книга переходит на родной язык ───────── -->
+    <section class="story" id="story" aria-label="Как книга переходит на родной язык">
+      <div class="story__stage">
+        <div class="story__caption" aria-live="polite">
+          <p data-step="0">Берём книгу, которую знают по-русски<span>Ф. Достоевский, «Белые ночи»</span></p>
+          <p data-step="1">Переводим её — слово за словом<span>орус тилден — малкъар тилге</span></p>
+          <p data-step="2">И ставим на общую полку<span>девять книг, открытых для всех</span></p>
+        </div>
+
+        <div class="paperbook" id="paperbook" aria-hidden="true">
+          <div class="paperbook__shadow"></div>
+          <div class="paperbook__page paperbook__page--l"><div class="paperbook__lines"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="paperbook__page paperbook__page--r"><div class="paperbook__lines"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="paperbook__cover"></div>
+        </div>
+
+        <div class="word" id="word" aria-hidden="true"></div>
+        <div class="shelf" id="shelf" aria-hidden="true"></div>
+
+        <div class="story__steps" aria-hidden="true"><b><i></i></b><b><i></i></b><b><i></i></b></div>
+      </div>
+    </section>
+
+    <!-- ───────── Полка ───────── -->
+    <section class="section bookshelf" id="shelfSection">
+      <h2 class="lede">Выберите книгу — она откроется в читалке</h2>
+      <div class="bookshelf__row" id="bookRow"></div>
+      <div class="bookshelf__plank" aria-hidden="true"></div>
+    </section>
+
+    <!-- ───────── Создатель ───────── -->
+    <section class="section creator">
+      <h2><small>Создатель проекта</small>Бияслан Мокаев</h2>
+      <a class="pill" href="https://t.me/mkvvprojects" target="_blank" rel="noopener">Telegram <i data-icon="arrow"></i></a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Asson-Antheneum, 2026</span>
+    <nav aria-label="Ссылки">
+      <a href="library.html">Скачать</a>
+      <a href="read.html">Читать</a>
+      <a href="https://github.com/biyaskaa/Asson-Antheneum" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://t.me/mkvvprojects" target="_blank" rel="noopener">Telegram</a>
+    </nav>
+  </footer>
+
+  <script src="data/books.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

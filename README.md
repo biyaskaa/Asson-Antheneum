@@ -4,6 +4,8 @@
 
 *Online library of Russian and world literature translated into the Karachay-Balkar language.*
 
+🌐 **Сайт:** [biyaskaa.github.io/Asson-Antheneum](https://biyaskaa.github.io/Asson-Antheneum/) — читалка онлайн и все PDF.
+
 ---
 
 ## 📖 О проекте
@@ -36,7 +38,16 @@
 - **Вычитывать.** Нашли ошибку или неудачную формулировку — напишите в Issues или пришлите Pull Request.
 - **Рассказывать.** Поделитесь проектом с теми, кому он может быть интересен.
 
+## 🗂 Устройство сайта
+
+Статический сайт для GitHub Pages, без сборки:
+
+- `index.html` — главная с бумажной анимацией
+- `library.html` — скачать PDF
+- `read.html` — онлайн-читалка (PDF.js), `read.html?book=<slug>` открывает конкретную книгу
+- `data/books.js` — список книг: чтобы добавить новую, положите PDF в `pdf/` и допишите строку
+
 ## 📬 Контакты
 
-- Telegram: [@mokaevprojects](https://t.me/mokaevprojects)
+- Telegram: [t.me/mkvvprojects](https://t.me/mkvvprojects)
 - GitHub: [@biyaskaa](https://github.com/biyaskaa)
